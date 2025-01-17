@@ -2,13 +2,12 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
 using DOL.AI;
-using log4net;
 
 namespace DOL.GS
 {
     public static class EntityManager
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly Logging.Logger log = Logging.LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
 
         public enum EntityType
         {

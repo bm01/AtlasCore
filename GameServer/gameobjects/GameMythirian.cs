@@ -2,13 +2,12 @@
 using DOL.Database;
 using DOL.GS.PacketHandler;
 using DOL.GS.Spells;
-using log4net;
 
 namespace DOL.GS
 {
 	public class GameMythirian : GameInventoryItem
 	{
-		private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+		private static readonly Logging.Logger log = Logging.LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
 
 		private GameMythirian() { }
 

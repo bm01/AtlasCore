@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using log4net;
 
 namespace DOL.GS
 {
@@ -9,7 +8,7 @@ namespace DOL.GS
 	/// </summary>
 	public static class PathingMgr
 	{
-		private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+		private static readonly Logging.Logger log = Logging.LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
 
 		/// <summary>
 		/// PathingMgr that does nothing

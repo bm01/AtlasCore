@@ -28,7 +28,6 @@ using DOL.GS.Styles;
 using DOL.GS.Utils;
 using DOL.Language;
 using JNogueira.Discord.Webhook.Client;
-using log4net;
 using static DOL.GS.IGameStaticItemOwner;
 
 namespace DOL.GS
@@ -38,7 +37,7 @@ namespace DOL.GS
     /// </summary>
     public class GamePlayer : GameLiving, IGameStaticItemOwner
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly Logging.Logger log = Logging.LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
 
         private const int SECONDS_TO_QUIT_ON_LINKDEATH = 60;
 
@@ -13204,7 +13203,7 @@ namespace DOL.GS
             /// <summary>
             /// Defines a logger for this class.
             /// </summary>
-            private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+            private static readonly Logging.Logger log = Logging.LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
 
             /// <summary>
             /// Holds the callback

@@ -3,13 +3,12 @@ using System.Reflection;
 using DOL.Database;
 using DOL.Events;
 using DOL.GS.PacketHandler;
-using log4net;
 
 namespace DOL.GS.Quests.Albion
 {
     public class WolfPeltCloak : BaseQuest
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly Logging.Logger log = Logging.LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
 
         protected const string questTitle = "Wolf Pelt Cloak";
         protected const string stewardWillieNpcName = "Steward Willie";

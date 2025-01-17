@@ -22,12 +22,10 @@ using DOL.GS.Quests;
 using DOL.GS.ServerProperties;
 using DOL.GS.ServerRules;
 using DOL.Language;
+using DOL.Logging;
 using DOL.Mail;
 using DOL.Network;
 using JNogueira.Discord.Webhook.Client;
-using log4net;
-using log4net.Config;
-using log4net.Core;
 
 namespace DOL.GS
 {
@@ -39,7 +37,7 @@ namespace DOL.GS
 		/// <summary>
 		/// Defines a logger for this class.
 		/// </summary>
-		private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+		private static Logger log;
 
 		#region Variables
 
@@ -58,12 +56,12 @@ namespace DOL.GS
 		/// <summary>
 		/// The textwrite for log operations
 		/// </summary>
-		protected ILog m_cheatLog;
+		protected Logging.Logger m_cheatLog;
 		
 		/// <summary>
 		/// The textwrite for log operations
 		/// </summary>
-		protected ILog m_dualIPLog;
+		protected Logging.Logger m_dualIPLog;
 
 		/// <summary>
 		/// Database instance
@@ -73,12 +71,12 @@ namespace DOL.GS
 		/// <summary>
 		/// The textwrite for log operations
 		/// </summary>
-		protected ILog m_gmLog;
+		protected Logging.Logger m_gmLog;
 
 		/// <summary>
 		/// The textwrite for log operations
 		/// </summary>
-		protected ILog m_inventoryLog;
+		protected Logging.Logger m_inventoryLog;
 
 		/// <summary>
 		/// Holds instance of current server rules
@@ -108,7 +106,7 @@ namespace DOL.GS
 		/// <summary>
 		/// A general logger for the server
 		/// </summary>
-		public ILog Logger
+		public Logging.Logger Log
 		{
 			get { return log; }
 		}
@@ -260,16 +258,13 @@ namespace DOL.GS
 			if (Instance != null)
 				return;
 
-			//Try to find the log.config file, if it doesn't exist
-			//we create it
 			var logConfig = new FileInfo(config.LogConfigFile);
-			if (!logConfig.Exists)
-			{
-				ResourceUtil.ExtractResource("logconfig.xml", logConfig.FullName);
-			}
 
-			//Configure and watch the config file
-			XmlConfigurator.ConfigureAndWatch(logConfig);
+			if (!logConfig.Exists)
+				ResourceUtil.ExtractResource("logconfig.xml", logConfig.FullName);
+
+			LoggingManager.Initialize(logConfig.FullName);
+			log = LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
 
 			//Create the instance
 			m_instance = new GameServer(config);
@@ -578,7 +573,7 @@ namespace DOL.GS
 		{
 			log.Fatal("Unhandled exception!\n" + e.ExceptionObject);
 			if (e.IsTerminating)
-				LogManager.Shutdown();
+				LogMessageQueue.Stop();
 		}
 
 		/// <summary>
@@ -979,7 +974,7 @@ namespace DOL.GS
 			if (log.IsInfoEnabled)
 				log.Info("Server Stopped");
 
-			LogManager.Shutdown();
+			Logging.LogMessageQueue.Stop();
 		}
 
 		#endregion
@@ -1060,7 +1055,7 @@ namespace DOL.GS
 		/// <param name="text">the text to log</param>
 		public void LogGMAction(string text)
 		{
-			m_gmLog.Logger.Log(typeof(GameServer), Level.Alert, text, null);
+			m_gmLog.Info(text);
 		}
 
 		/// <summary>
@@ -1069,7 +1064,7 @@ namespace DOL.GS
 		/// <param name="text">the text to log</param>
 		public void LogCheatAction(string text)
 		{
-			m_cheatLog.Logger.Log(typeof(GameServer), Level.Alert, text, null);
+			m_cheatLog.Info(text);
 			log.Debug(text);
 		}
 		
@@ -1079,7 +1074,7 @@ namespace DOL.GS
 		/// <param name="text">the text to log</param>
 		public void LogDualIPAction(string text)
 		{
-			m_dualIPLog.Logger.Log(typeof(GameServer), Level.Alert, text, null);
+			m_dualIPLog.Info(text);
 			log.Debug(text);
 		}
 
@@ -1089,7 +1084,7 @@ namespace DOL.GS
 		/// <param name="text">the text to log</param>
 		public void LogInventoryAction(string text)
 		{
-			m_inventoryLog.Logger.Log(typeof(GameServer), Level.Alert, text, null);
+			m_inventoryLog.Info(text);
 		}
 
 		#endregion
@@ -1234,10 +1229,10 @@ namespace DOL.GS
 		/// <param name="config">A valid game server configuration</param>
 		protected GameServer(GameServerConfiguration config) : base(config)
 		{
-			m_gmLog = LogManager.GetLogger(Configuration.GMActionsLoggerName);
-			m_cheatLog = LogManager.GetLogger(Configuration.CheatLoggerName);
-			m_dualIPLog = LogManager.GetLogger(Configuration.DualIPLoggerName);
-			m_inventoryLog = LogManager.GetLogger(Configuration.InventoryLoggerName);
+			m_gmLog = Logging.LoggingManager.Create(Configuration.GMActionsLoggerName);
+			m_cheatLog = Logging.LoggingManager.Create(Configuration.CheatLoggerName);
+			m_dualIPLog = Logging.LoggingManager.Create(Configuration.DualIPLoggerName);
+			m_inventoryLog = Logging.LoggingManager.Create(Configuration.InventoryLoggerName);
 
 			if (log.IsDebugEnabled)
 			{

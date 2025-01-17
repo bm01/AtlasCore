@@ -34,8 +34,9 @@
         <RegisterForComInterop>False</RegisterForComInterop>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="log4net" Version="3.0.3" />
+        <ProjectReference Include="..\CoreBase\CoreBase.csproj" />
         <PackageReference Include="MySqlConnector" Version="2.4.0" />
+        <PackageReference Include="NLog" Version="5.3.4" />
         <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
     </ItemGroup>
     <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />

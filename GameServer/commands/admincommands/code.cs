@@ -35,7 +35,7 @@ namespace DOL.GS.Commands
 	public class DynCodeCommandHandler : AbstractCommandHandler, ICommandHandler
 	{
 
-        private static log4net.ILog log = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static Logging.Logger log = Logging.LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
 
         public static void ExecuteCode(GameClient client, string methodBody)
         {
@@ -112,7 +112,7 @@ namespace DOL.GS.Commands
             text.Append("using DOL.Events;\n");
             text.Append("using log4net;\n");
             text.Append("public class DynCode {\n");
-            text.Append("private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);\n");
+            text.Append("private static readonly Logging.Logger log = Logging.LoggerFactory.Create(MethodBase.GetCurrentMethod().DeclaringType);\n");
             text.Append("public static GameClient Client = null;\n");
             text.Append("public static void print(object obj) {\n");
             text.Append("	string str = (obj==null)?\"(null)\":obj.ToString();\n");

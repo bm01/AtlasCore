@@ -8,14 +8,12 @@ using DOL.Events;
 using DOL.GS;
 using DOL.GS.PacketHandler;
 using DOL.GS.ServerProperties;
-using log4net;
 
 namespace DOL.GS.Scripts
 {
     public class Legion : GameEpicBoss
     {
-        private static new readonly log4net.ILog log =
-            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static new readonly Logging.Logger log = Logging.LoggingManager.Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private static IArea legionArea = null;
 
@@ -304,7 +302,7 @@ namespace DOL.AI.Brain
 {
     public class LegionBrain : EpicBossBrain
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly Logging.Logger log = Logging.LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
         
         public LegionBrain()
             : base()
@@ -724,8 +722,7 @@ namespace DOL.GS
 {
     public class LegionAdd : GameNPC
     {
-        private static new readonly log4net.ILog log =
-            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static new readonly Logging.Logger log = Logging.LoggingManager.Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public LegionAdd()
             : base()
@@ -783,8 +780,7 @@ namespace DOL.AI.Brain
 {
     public class LegionAddBrain : StandardMobBrain
     {
-        private static readonly log4net.ILog log =
-            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly Logging.Logger log = Logging.LoggingManager.Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public LegionAddBrain()
             : base()
@@ -810,8 +806,7 @@ namespace DOL.GS
 {
     public class Behemoth : GameEpicBoss
     {
-        private static new readonly log4net.ILog log =
-            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static new readonly Logging.Logger log = Logging.LoggingManager.Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public Behemoth()
             : base()
@@ -880,8 +875,7 @@ namespace DOL.AI.Brain
 {
     public class BehemothBrain : StandardMobBrain
     {
-        private static readonly log4net.ILog log =
-            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly Logging.Logger log = Logging.LoggingManager.Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public BehemothBrain()
             : base()

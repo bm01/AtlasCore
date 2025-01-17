@@ -30,7 +30,7 @@ namespace DOL.GS.Commands
 		)]
 	public class HouseCommandHandler : AbstractCommandHandler, ICommandHandler
 	{
-		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+		private static readonly Logging.Logger log = Logging.LoggingManager.Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 		public void OnCommand(GameClient client, string[] args)
 		{

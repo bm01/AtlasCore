@@ -2,9 +2,8 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Reflection;
+using DOL.GameServerConsole;
 using DOL.GS;
-using DOLGameServerConsole;
-using log4net;
 
 namespace DOL.DOLServer.Actions
 {
@@ -13,11 +12,6 @@ namespace DOL.DOLServer.Actions
 	/// </summary>
 	public class ConsoleStart : IAction
 	{
-		/// <summary>
-		/// Defines a logger for this class.
-		/// </summary>
-		private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
 		/// <summary>
 		/// returns the name of this action
 		/// </summary>
@@ -47,14 +41,14 @@ namespace DOL.DOLServer.Actions
 
 		private static bool StartServer()
 		{
-			Console.WriteLine("Starting the server");
+			Console.WriteLine("Starting GameServer");
 			bool start = GameServer.Instance.Start();
 			return start;
 		}
 
 		public void OnAction(Hashtable parameters)
 		{
-			Console.WriteLine("Starting GameServer ... please wait a moment!");
+			Console.WriteLine("Starting...");
 			FileInfo configFile;
 			FileInfo currentAssembly = null;
 			if (parameters["-config"] != null)

@@ -5,7 +5,6 @@ using DOL.Events;
 using DOL.GS.PacketHandler;
 using DOL.Language;
 using JNogueira.Discord.Webhook.Client;
-using log4net;
 
 namespace DOL.GS
 {
@@ -301,7 +300,7 @@ namespace DOL.GS
 		/// </summary>
 		public class PadArea : Area.Circle
 		{
-			private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+			private static readonly Logging.Logger log = Logging.LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
 
 			GameRelicPad m_parent;
 

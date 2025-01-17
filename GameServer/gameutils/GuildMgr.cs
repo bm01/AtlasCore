@@ -5,13 +5,12 @@ using System.Reflection;
 using System.Threading;
 using DOL.Database;
 using DOL.GS.PacketHandler;
-using log4net;
 
 namespace DOL.GS
 {
     public sealed class GuildMgr
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly Logging.Logger log = Logging.LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
 
         public const long COST_RE_EMBLEM = 1000000; // 200 gold.
 

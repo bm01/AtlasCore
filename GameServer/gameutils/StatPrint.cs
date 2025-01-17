@@ -4,13 +4,12 @@ using System.Text;
 using System.Threading;
 using DOL.Events;
 using DOL.GS.PerformanceStatistics;
-using log4net;
 
 namespace DOL.GS.GameEvents
 {
     public class StatPrint
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly Logging.Logger log = Logging.LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
 
         private static volatile Timer _timer;
         private static long _lastBytesIn;
@@ -104,7 +103,7 @@ namespace DOL.GS.GameEvents
                     AppendStatistic(stats, "pg/s", _pageFaultsPerSecond);
                     AppendStatistic(stats, "dsk/s", _diskTransfersPerSecond);
 
-                    log.Info(stats);
+                    log.Info(stats.ToString());
                 }
             }
             catch (Exception e)

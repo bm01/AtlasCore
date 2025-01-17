@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Reflection;
-using log4net;
 
 namespace DOL.GS
 {
     public static class ServiceUtils
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly Logging.Logger log = Logging.LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
         private static long HalfTickRate => GameLoop.TickRate / 2;
 
         public static bool ShouldTick(long tickTime)

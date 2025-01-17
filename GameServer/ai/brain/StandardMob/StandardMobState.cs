@@ -1,13 +1,12 @@
 ﻿using System.Reflection;
 using DOL.GS;
 using DOL.GS.ServerProperties;
-using log4net;
 
 namespace DOL.AI.Brain
 {
     public class StandardMobState : FSMState
     {
-        protected static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        protected static readonly Logging.Logger log = Logging.LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
 
         protected StandardMobBrain _brain = null;
 

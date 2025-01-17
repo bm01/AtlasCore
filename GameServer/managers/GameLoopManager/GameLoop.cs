@@ -3,13 +3,12 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Threading;
 using DOL.GS.ServerProperties;
-using log4net;
 
 namespace DOL.GS
 {
     public static class GameLoop
     {
-        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly Logging.Logger log = Logging.LoggingManager.Create(MethodBase.GetCurrentMethod().DeclaringType);
         private const bool DYNAMIC_BUSY_WAIT_THRESHOLD = true; // Setting it to false disables busy waiting completely unless a default value is given to '_busyWaitThreshold'.
         private const string THREAD_NAME = "GameLoop";
 
